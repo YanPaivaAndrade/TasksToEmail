@@ -6,7 +6,7 @@ using TasksToEmail.Models.Interface;
 
 namespace TasksToEmail.Models
 {
-    public class Tarefa
+    public class Tarefa : IObservable<Email>
     {
         private string Titulo;
         private string Type;
@@ -15,10 +15,14 @@ namespace TasksToEmail.Models
         private int Severity;
         private DateTime ChangeDate;
         private string ChangeBy;
+        private List<IObserver<Email>> _emails;
+        private Email _email;
+
 
         public Tarefa()
         {
             _Status = new TarefasPendente();
+            _emails = new List<IObserver<Email>>();
         }
 
         public string GetTitulo()
@@ -82,6 +86,23 @@ namespace TasksToEmail.Models
         public void SetTChangeBy(string autor)
         {
             this.ChangeBy = autor;
+        }
+
+        public IDisposable Subscribe(IObserver<Email> observer)
+        {
+            if (!_emails.Contains(observer))
+            {
+                _emails.Add(observer);
+            }
+            return new Disposer(_emails, observer);
+        }
+        public void EnviarEmail()
+        {
+
+            foreach (IObserver<Email> email in _emails)
+            {
+                email.OnNext(_email);
+            }
         }
 
 
