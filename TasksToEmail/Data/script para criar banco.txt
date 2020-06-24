@@ -13,3 +13,21 @@ CREATE TABLE Tarefa(
 ALTER TABLE Tarefa ADD CONSTRAINT PK_TAREFA
  			PRIMARY KEY (idTarefa)
 GO
+
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 1', 'Backlog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 2', 'Backlog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 3', 'Backlog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 4', 'Bug', 'Dimensionamento', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 5', 'Bug', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 6', 'Backlog', 'Dimensionamento', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 7', 'Backlog', 'Entregue', 1, 1, 24/05/2020, 'autor 1');
+insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
+Values('tarefa 8', 'Bug', 'Entregue', 1, 1, 24/05/2020, 'autor 1');
+

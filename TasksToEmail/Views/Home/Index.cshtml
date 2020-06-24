@@ -1,7 +1,73 @@
-﻿
+﻿@model IEnumerable<TasksToEmail.Models.Tarefa>
+
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h1>@ViewData["Title"]</h1>
+<p>
+    <a asp-action="Create" class="btn btn-outline-secondary">Nova Tarefa</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="badge-secondary">
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Severity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeBy)
+            </th>           
+            <th>
 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modeItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.Severity)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.ChangeDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.ChangeBy)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdTarefa"> Editar</a>
+                <a asp-action="Details" asp-route-id="@item.IdTarefa"> Detalhes</a>
+                <a asp-action="Delete" asp-route-id="@item.IdTarefa"> Deletar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
