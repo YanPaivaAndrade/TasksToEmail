@@ -76,3 +76,7 @@ C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\obj\Debug\TasksToEmail.
 C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\obj\Debug\TasksToEmail.csproj.CopyComplete
 C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\obj\Debug\TasksToEmail.dll
 C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\obj\Debug\TasksToEmail.pdb
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.SqlServer.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.xml
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.SqlServer.xml

@@ -8,14 +8,14 @@ namespace TasksToEmail.Models
 {
     public class TarefasDimensionamento : TarefaStatus
     {
-        public string getStatus(Tarefa t)
+        public string getStatus()
         {
             return "Dimensionamento";
         }
 
         public void SetTarefaDesenvolvimento(Tarefa t)
         {
-            t.SetStatus(new TarefasDesenvolvimento);
+            t.SetStatus(new TarefasDesenvolvimento());
         }
 
         public void SetTarefaDimensionamento(Tarefa t)

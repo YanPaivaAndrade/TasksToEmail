@@ -8,7 +8,7 @@ namespace TasksToEmail.Models
 {
     public class TarefasEntregue : TarefaStatus
     {
-        public string getStatus(Tarefa t)
+        public string getStatus()
         {
             return "Entregue";
         }

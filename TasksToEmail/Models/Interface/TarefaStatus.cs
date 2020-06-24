@@ -14,7 +14,6 @@ namespace TasksToEmail.Models.Interface
         void SetTarefaDimensionamento(Tarefa t);
         void SetTarefaEntregue(Tarefa t);
         void SetTarefaPendente(Tarefa t);
-        string getStatus(Tarefa t);
         string getStatus();
     }
 }

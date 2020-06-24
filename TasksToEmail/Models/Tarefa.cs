@@ -8,85 +8,64 @@ namespace TasksToEmail.Models
 {
     public class Tarefa : IObservable<Email>
     {
-        private string Titulo;
-        private string Type;
-        private TarefaStatus _Status;
-        private int Priority;
-        private int Severity;
-        private DateTime ChangeDate;
-        private string ChangeBy;
-        private List<IObserver<Email>> _emails;
-        private Email _email;
+        public int IdTarefa { get; set; }
+        public string Titulo { get; set; }
+        public string Type { get; set; }
+        public TarefaStatus _Status { get; set; }
+        public string Status { get; set; }
+        public int Priority { get; set; }
+        public int Severity { get; set; }
+        public DateTime ChangeDate { get; set; }
+        public string ChangeBy { get; set; }
+        public List<IObserver<Email>> _emails { get; set; }
+        public Email _email { get; set; }
 
 
         public Tarefa()
         {
             _Status = new TarefasPendente();
             _emails = new List<IObserver<Email>>();
+            Status = _Status.getStatus();
         }
 
-        public string GetTitulo()
-        {
-            return this.Titulo;
-        }
-        public void SetTitulo(string titulo)
-        {
-            this.Titulo = titulo;
-        }
-        public string GetType()
-        {
-            return this.Type;
-        }
-        public void SetType(string type)
-        {
-            this.Type = type;
-        }
+       
         public void SetStatus(TarefaStatus status)
         {
             this._Status = status;
+            Status = status.getStatus();
+        }
+        public void SetTarefaDesenvolvimento()
+        {
+            _Status.SetTarefaDesenvolvimento(this);
+            Status = _Status.getStatus();
+        }
+        public void SetTarefaDimensionamento() 
+        {
+            _Status.SetTarefaDimensionamento(this);
+            Status = _Status.getStatus();
+        }
+
+        public void SetTarefaEntregue() 
+        {
+            _Status.SetTarefaEntregue(this);
+            Status = _Status.getStatus();
+        }
+        public void SetTarefaPendente()
+        {
+            _Status.SetTarefaPendente(this);
+            Status = _Status.getStatus();
         }
         public string GetStatus()
         {
-            return "Tarefa: " + this.GetTitulo()
-                + "\n Tipo: " + this.GetType()
+            return "Tarefa: " + this.Titulo
+                + "\n Tipo: " + this.Type
                 + "\n Status:" + _Status.getStatus()
-                + "\n Prioridade: " + this.GetPriority()
-                + "\n Gravidade: " + this.GetSeverity()
-                + "\n Data da ultima modificação: " + this.GetChangeDate()
-                + "\n Altor: " + this.GetTChangeBy(); ;
+                + "\n Prioridade: " + this.Priority
+                + "\n Gravidade: " + this.Severity
+                + "\n Data da ultima modificação: " + ChangeDate
+                + "\n Altor: " + ChangeBy; 
         }
-        public int GetPriority()
-        {
-            return this.Priority;
-        }
-        public void SetPriority(int nivel)
-        {
-            this.Priority = nivel;
-        }
-        public int GetSeverity()
-        {
-            return this.Severity;
-        }
-        public void SetSeverity(int nivel)
-        {
-            this.Severity = nivel;
-        }
-        public DateTime GetChangeDate()
-        {
-            return ChangeDate;
-        }
-        public void SetChangeDate(DateTime data)
-        {
-            this.ChangeDate = data;
-        }
-        public string GetTChangeBy()
-        {
-            return this.ChangeBy;
-        }
-        public void SetTChangeBy(string autor)
-        {
-            this.ChangeBy = autor;
-        }
+       
 
         public IDisposable Subscribe(IObserver<Email> observer)
         {
