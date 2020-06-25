@@ -24,6 +24,10 @@ namespace TasksToEmail.Controllers
             var list = _TarefaService.FindAll();
             return View(list);
         }
+        public ActionResult Email()
+        {
+            return View();
+        }
 
     }
 }
