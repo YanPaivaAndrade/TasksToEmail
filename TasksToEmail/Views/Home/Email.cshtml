@@ -1,4 +1,4 @@
-﻿
+﻿@model TasksToEmail.Models.Email
 @{
     ViewBag.Title = "Email";
 }
@@ -14,13 +14,13 @@
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Assunto</span>
-            <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-default" style="min-width:170%;">
+            <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-default" style="min-width:170%;" value="@Model.Assunto">
         </div>
     </div>
     <div class="input-group-prepend">
         <span class="input-group-text">Corpo do Email</span>
     </div>
     
-    <textarea class="form-control" id="TextArea" rows="8" style="min-width:80%;"></textarea>
+    <textarea class="form-control" id="TextArea" rows="8" style="min-width:80%;">@Model.CorpoDoEmail</textarea>
 
 </div>

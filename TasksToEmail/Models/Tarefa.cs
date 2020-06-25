@@ -18,7 +18,7 @@ namespace TasksToEmail.Models
         public DateTime ChangeDate { get; set; }
         public string ChangeBy { get; set; }
         public List<IObserver<Email>> _emails { get; set; }
-        //public Email _email { get; set; }
+       
 
 
         public Tarefa()
@@ -77,11 +77,7 @@ namespace TasksToEmail.Models
         }
         public void EnviarEmail()
         {
-
-            foreach (IObserver<Email> email in _emails)
-            {
-                //email.OnNext();
-            }
+            
         }
 
 

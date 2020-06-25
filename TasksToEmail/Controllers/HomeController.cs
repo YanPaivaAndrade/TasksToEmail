@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TasksToEmail.Models;
 using TasksToEmail.Services;
 
 namespace TasksToEmail.Controllers
@@ -26,7 +27,15 @@ namespace TasksToEmail.Controllers
         }
         public ActionResult Email()
         {
-            return View();
+            var list = _TarefaService.FindAllPendente();
+            Email e = new Email();
+            e.Assunto = "Tarefas  pendentes ordenadas por Priority ";
+            foreach (Tarefa t in list)
+            {
+                e.CorpoDoEmail += t.GetStatus();
+                e.CorpoDoEmail += "\n\n";
+            }
+            return View(e);
         }
 
     }

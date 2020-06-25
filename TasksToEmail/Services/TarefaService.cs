@@ -21,6 +21,12 @@ namespace TasksToEmail.Services
             var tarefas = (from obj in _context.Tarefas select obj).OrderBy(tarefa => tarefa.Priority).ToList();
             return  tarefas;
         }
+        public List<Tarefa> FindAllPendente()
+        {
+            var tarefas = (from obj in _context.Tarefas where obj.Status.Equals("Pendente") select obj).OrderBy(tarefa => tarefa.Priority).ToList();
+            return tarefas;
+        }
+
 
     }
 }
