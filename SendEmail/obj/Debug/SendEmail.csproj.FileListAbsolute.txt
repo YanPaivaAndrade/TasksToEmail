@@ -1,0 +1,2 @@
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\SendEmail\obj\Debug\SendEmail.csprojAssemblyReference.cache
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\SendEmail\obj\Debug\SendEmail.csproj.CoreCompileInputs.cache

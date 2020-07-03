@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using TasksToEmail.Models;
 using TasksToEmail.Services;
 
@@ -12,9 +13,9 @@ namespace TasksToEmail.Controllers
     public class HomeController : Controller
     {
         private readonly TarefaService _TarefaService = new TarefaService(new Data.TasksToEmailContext());
+       
         public HomeController()
         {
-
         }
         public HomeController(TarefaService service)
         {
@@ -23,6 +24,7 @@ namespace TasksToEmail.Controllers
         public ActionResult Index()
         {
             var list = _TarefaService.FindAll();
+            
             return View(list);
         }
         public ActionResult Email()
