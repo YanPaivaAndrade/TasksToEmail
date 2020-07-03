@@ -11,11 +11,15 @@ namespace TasksToEmail.Services
 {
     public class TarefaService
     {
-        private readonly TasksToEmailContext _context;
-        public TarefaService(TasksToEmailContext context)
+        private readonly TasksToEmailContext _context = new TasksToEmailContext();
+        public TarefaService()
+        {
+
+        }
+       /* public TarefaService(TasksToEmailContext context)
         {
             _context = context;
-        }
+        }*/
         public List<Tarefa> FindAll()
         {
             var tarefas = (from obj in _context.Tarefas select obj).OrderBy(tarefa => tarefa.Priority).ToList();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -22,11 +23,22 @@ namespace TasksToEmail
             
         }
 
-        private async System.Threading.Tasks.Task testcAsync()
+        private void testcAsync()
         {
-            Thread.Sleep(500);
-            SpamEmailService ses = new SpamEmailService();
-            await ses.EnviarEmailAutomatizado(2);           
+            int cont = 0;
+            TarefaService _ts = new TarefaService();
+            Task.Factory.StartNew(() =>
+            {
+                while(_ts.FindAllPendente().Count> 0 && cont < 2)
+                {
+                    Thread.Sleep(900000);
+                    SpamEmailService ses = new SpamEmailService();
+                    ses.EnviarEmailAutomatizado(2);
+                    cont++;
+                }                
+            });
+            
+                    
 
         }
     }

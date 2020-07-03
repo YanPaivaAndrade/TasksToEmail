@@ -12,7 +12,7 @@ namespace TasksToEmail.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TarefaService _TarefaService = new TarefaService(new Data.TasksToEmailContext());
+        private readonly TarefaService _TarefaService = new TarefaService();
        
         public HomeController()
         {

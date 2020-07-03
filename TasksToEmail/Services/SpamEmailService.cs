@@ -12,7 +12,7 @@ namespace TasksToEmail.Services
 {
     public class SpamEmailService
     {
-        private readonly TarefaService _TarefaService = new TarefaService(new Data.TasksToEmailContext());
+        private readonly TarefaService _TarefaService = new TarefaService();
        
         public bool Test()
         {
@@ -20,16 +20,14 @@ namespace TasksToEmail.Services
                 return true;
             return false;
         }
-        public async Task EnviarEmailAutomatizado(int? cont)
+        public void EnviarEmailAutomatizado(int? cont)
         {
-            Thread.Sleep(500);
+            
             List<Tarefa> list = _TarefaService.FindAllPendente();
             PreencherEmail(list);
-           /* if (cont > 0)
+            /*if (cont > 0)
                 EnviarEmailAutomatizado(cont--);
-            else
-                return;
-           */
+            return;*/       
         }
        
         private void PreencherEmail(List<Tarefa> list)
