@@ -19,7 +19,10 @@ namespace TasksToEmail
             // Código que é executado na inicialização do aplicativo
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            SpamEmailService.SendEmail(1);            
+
+            //Preencher os campos de Email e Password antes de executar
+            SpamEmailService.SendEmailPendente(1);
+            SpamEmailService.SendEmailPendente();
         }
 
         

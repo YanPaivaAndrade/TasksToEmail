@@ -14,12 +14,8 @@ namespace TasksToEmail.Services
         private readonly TasksToEmailContext _context = new TasksToEmailContext();
         public TarefaService()
         {
-
         }
-       /* public TarefaService(TasksToEmailContext context)
-        {
-            _context = context;
-        }*/
+      
         public List<Tarefa> FindAll()
         {
             var tarefas = (from obj in _context.Tarefas select obj).OrderBy(tarefa => tarefa.Priority).ToList();
@@ -30,7 +26,20 @@ namespace TasksToEmail.Services
             var tarefas = (from obj in _context.Tarefas where obj.Status.Equals("Pendente") select obj).OrderBy(tarefa => tarefa.Priority).ToList();
             return tarefas;
         }
-
-
+        public List<Tarefa> FindAllDimensionamento()
+        {
+            var tarefas = (from obj in _context.Tarefas where obj.Status.Equals("Dimensionamento") select obj).OrderBy(tarefa => tarefa.Priority).ToList();
+            return tarefas;
+        }
+        public List<Tarefa> FindAllDesenvolvimento()
+        {
+            var tarefas = (from obj in _context.Tarefas where obj.Status.Equals("Desenvolvimento") select obj).OrderBy(tarefa => tarefa.Priority).ToList();
+            return tarefas;
+        }
+        public List<Tarefa> FindAllEntregue()
+        {
+            var tarefas = (from obj in _context.Tarefas where obj.Status.Equals("Entregue") select obj).OrderBy(tarefa => tarefa.Priority).ToList();
+            return tarefas;
+        }
     }
 }

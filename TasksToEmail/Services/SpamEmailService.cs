@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ namespace TasksToEmail.Services
     {
         private static readonly TarefaService _TarefaService = new TarefaService();
 
-        public static void SendEmail(int tempo)
+        public static void SendEmailPendente(int tempo)
         {
             int cont = 0;
             Task.Factory.StartNew(() =>
@@ -22,18 +24,55 @@ namespace TasksToEmail.Services
                 while (_TarefaService.FindAllPendente().Count > 0 && cont < 2)
                 {
                     Thread.Sleep(tempo * 60000);
-                    PreencherEmail(_TarefaService.FindAllPendente());
+                    LogDoEmail(_TarefaService.FindAllPendente(), "Pendente");
+                    Send("Pendente", _TarefaService.FindAllPendente());
                     cont++;
                 }
             });
         }
-        private static void PreencherEmail(List<Tarefa> list)
+        public static void SendEmailPendente()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1 * 60000);
+                LogDoEmail(_TarefaService.FindAllPendente(), "Pendente");
+                Send("Pendente", _TarefaService.FindAllPendente());
+            });
+        }
+        public static void SendEmailDimensionamento()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1 * 60000);
+                LogDoEmail(_TarefaService.FindAllDimensionamento(), "Dimensionamento");   
+                Send("Dimensionamento", _TarefaService.FindAllDimensionamento());
+            });
+        }
+        public static void SendEmailDesenvolvimento()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1 * 60000);
+                LogDoEmail(_TarefaService.FindAllDesenvolvimento(), "Desenvolvimento");
+                Send("Desenvolvimento", _TarefaService.FindAllDesenvolvimento());
+            });
+        }
+        public static void SendEmailEntregue()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1 * 60000);
+                LogDoEmail(_TarefaService.FindAllEntregue(), "Entregue");
+                Send("Entregue", _TarefaService.FindAllEntregue());
+            });
+        }
+        private static void LogDoEmail(List<Tarefa> list, string assunto)
         {
             FileStream file = null;
             StreamWriter sw = null;
-            string path = @"C:\Users\yan_1\Documents\Rerum\TasksToEmail\email.txt";
+            string path = @"C:\Users\yan_1\Documents\Rerum\TasksToEmail\log.txt";
             Email e = new Email();
-            e.Assunto = "Tarefas  pendentes ordenadas por Priority ";
+            e.Assunto = "Tarefas " +assunto+ " ordenadas por Priority ";
             foreach (Tarefa t in list)
             {
                 e.CorpoDoEmail += t.GetStatus();
@@ -59,6 +98,43 @@ namespace TasksToEmail.Services
             }
 
         }
+        private static void Send(string assunto, List<Tarefa> list)
+        {
+            DateTime data = DateTime.Now;
+            string smtpServer = "smtp.gmail.com";
+            string smtpLogin = "";
+            string smtpPassword = "";
+            int smtpPort = 587;
 
+            Email e = new Email();
+            e.Assunto = @"Tarefas " + assunto + " ordenadas por Priority";
+            
+            e.Destinatario = @"";
+            e.Remetente = @"";
+            MailMessage message = new MailMessage(e.Remetente, e.Destinatario);
+            message.Subject = e.Assunto;
+            foreach (Tarefa t in list)
+            {
+                e.CorpoDoEmail += t.GetStatus();
+                e.CorpoDoEmail += "\n\n";
+            }
+            message.Body = @"Segue relatório do RAT gerado em "
+                            +data.ToString("dd / MM / yyyy HH: mm") 
+                            + ".\n" + e.CorpoDoEmail;
+
+            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
+            smtp.EnableSsl = smtpPort == 587;
+            smtp.UseDefaultCredentials = smtpPort == 25;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+            if (smtpPort == 587)
+            {
+                NetworkCredential cred = new NetworkCredential(smtpLogin, smtpPassword);
+                smtp.Credentials = cred;
+            }
+
+            smtp.Send(message);
+
+        }
     }
 }
