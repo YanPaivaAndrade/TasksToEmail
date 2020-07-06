@@ -10,27 +10,24 @@ using TasksToEmail.Models;
 
 namespace TasksToEmail.Services
 {
-    public class SpamEmailService
+    public static class SpamEmailService
     {
-        private readonly TarefaService _TarefaService = new TarefaService();
-       
-        public bool Test()
+        private static readonly TarefaService _TarefaService = new TarefaService();
+
+        public static void SendEmail(int tempo)
         {
-            if (_TarefaService.FindAllPendente().Count > 0 || _TarefaService.FindAllPendente() != null)
-                return true;
-            return false;
+            int cont = 0;
+            Task.Factory.StartNew(() =>
+            {
+                while (_TarefaService.FindAllPendente().Count > 0 && cont < 2)
+                {
+                    Thread.Sleep(tempo * 60000);
+                    PreencherEmail(_TarefaService.FindAllPendente());
+                    cont++;
+                }
+            });
         }
-        public void EnviarEmailAutomatizado(int? cont)
-        {
-            
-            List<Tarefa> list = _TarefaService.FindAllPendente();
-            PreencherEmail(list);
-            /*if (cont > 0)
-                EnviarEmailAutomatizado(cont--);
-            return;*/       
-        }
-       
-        private void PreencherEmail(List<Tarefa> list)
+        private static void PreencherEmail(List<Tarefa> list)
         {
             FileStream file = null;
             StreamWriter sw = null;
@@ -57,10 +54,11 @@ namespace TasksToEmail.Services
             {
                 if (file != null)
                     file.Close();
-               // if (sw != null)
-                  //  sw.Close();
+                // if (sw != null)
+                //  sw.Close();
             }
-            
+
         }
+
     }
 }
