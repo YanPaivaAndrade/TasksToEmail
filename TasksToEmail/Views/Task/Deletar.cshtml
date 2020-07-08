@@ -1,0 +1,96 @@
+﻿@model TasksToEmail.Models.Tarefa
+@{
+    ViewData["Title"] = "Deletar";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <h3>Você tem certeza que deseja deletar esta tarefa?</h3>
+    <div>
+        <h4>Tarefa</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IdTarefa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdTarefa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Priority)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Priority)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Severity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Severity)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ChangeDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ChangeDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ChangeBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ChangeBy)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Voltar", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

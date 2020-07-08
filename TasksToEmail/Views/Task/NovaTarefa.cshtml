@@ -1,0 +1,80 @@
+﻿
+@model TasksToEmail.Models.ViewModel.TarefaViewModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>Tarefas</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="NovaTarefa" method="post">
+            <input type="hidden" value="@Model.Tarefa.IdTarefa" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label"> @Html.DisplayNameFor(model => model.Tarefa.Titulo)</label>
+                <input name="@Html.DisplayNameFor(model => model.Tarefa.Titulo)"
+                       id="@Html.DisplayNameFor(model => model.Tarefa.Titulo)"
+                       type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Tarefa.Type)</label>
+                @Html.DropDownList(@Html.DisplayNameFor(model => model.Tarefa.Type).ToString(),
+                     new SelectList(Model.TypeProp),
+                     new { @class = "form-control" })
+
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Tarefa.Status)</label>
+
+                @Html.DropDownList(@Html.DisplayNameFor(model => model.Tarefa.Status).ToString(),
+                    new SelectList(Model.StatusProp),
+                    new { @class = "form-control" })
+
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Tarefa.Priority)</label>
+
+                @Html.DropDownList(@Html.DisplayNameFor(model => model.Tarefa.Priority).ToString(),
+                   new SelectList(Model.PriorityProp),
+                   new { @class = "form-control" })
+
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Tarefa.Severity)</label>
+                @Html.DropDownList(@Html.DisplayNameFor(model => model.Tarefa.Severity).ToString(),
+                   new SelectList(Model.SeverityProp),
+                   new { @class = "form-control" })
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Tarefa.ChangeDate)</label>
+                <input name="@Html.DisplayNameFor(model => model.Tarefa.ChangeDate)"
+                       id="@Html.DisplayNameFor(model => model.Tarefa.ChangeDate)"
+                       value="" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Tarefa.ChangeBy)</label>
+                <input name="@Html.DisplayNameFor(model => model.Tarefa.ChangeBy)"
+                       id="name=" @Html.DisplayNameFor(model => model.Tarefa.ChangeBy) "" class="form-control" />
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <input type="submit" value="salvar" class="btn btn-outline-secondary" />
+                    @Html.ActionLink("Voltar para lista", "Index", "Home", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+                </div>
+            }
+            </form>
+    </div>
+</div>
