@@ -165,6 +165,7 @@
     <Content Include="Views\Task\NovaTarefa.cshtml" />
     <Content Include="Views\Task\Deletar.cshtml" />
     <Content Include="Views\Home\Alerta.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
