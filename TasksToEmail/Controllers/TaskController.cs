@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 using TasksToEmail.Models;
+using TasksToEmail.Models.Interface;
 using TasksToEmail.Models.ViewModel;
 using TasksToEmail.Services;
 using TasksToEmail.Services.Exceções;
@@ -47,6 +49,17 @@ namespace TasksToEmail.Controllers
             }
             try
             {
+                var statusAntigo = _TarefaService.FindById(idTarefa).Status;
+                if (!statusAntigo.Equals(tarefa.Status))
+                {
+                    string nomeClasse = "TasksToEmail.Models.Tarefa"+statusAntigo;
+                    string nomeMetodo = "SetTarefa" + tarefa.Status;
+                    var typeObj = Type.GetType(nomeClasse);
+                    var obj = Activator.CreateInstance(typeObj);
+                    tarefa.SetStatus((TarefaStatus)obj);
+                    var metodo = tarefa.GetType().GetMethod(nomeMetodo);
+                    metodo.Invoke(tarefa, null);
+                }
                 _TarefaService.Update(tarefa);
                 return RedirectToAction(nameof(HomeController.Index));
             }

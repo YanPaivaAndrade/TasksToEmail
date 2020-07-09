@@ -23,16 +23,13 @@ namespace TasksToEmail.Models
 
         public Tarefa()
         {
-            _Status = new TarefasPendente();
-            _emails = new List<IObserver<Email>>();
-            Status = _Status.getStatus();
+            
         }
 
        
         public void SetStatus(TarefaStatus status)
         {
             this._Status = status;
-            Status = status.getStatus();
         }
         public void SetTarefaDesenvolvimento()
         {

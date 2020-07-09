@@ -6,8 +6,9 @@ using TasksToEmail.Models.Interface;
 
 namespace TasksToEmail.Models
 {
-    public class TarefasEntregue : TarefaStatus
+    public class TarefaEntregue : TarefaStatus
     {
+           
         public string getStatus()
         {
             return "Entregue";

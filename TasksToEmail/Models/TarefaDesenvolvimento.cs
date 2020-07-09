@@ -6,7 +6,7 @@ using TasksToEmail.Models.Interface;
 
 namespace TasksToEmail.Models
 {
-    public class TarefasDesenvolvimento : TarefaStatus
+    public class TarefaDesenvolvimento : TarefaStatus
     {
         public string getStatus()
         {
@@ -19,17 +19,17 @@ namespace TasksToEmail.Models
 
         public void SetTarefaDimensionamento(Tarefa t)
         {
-            t.SetStatus(new TarefasDimensionamento());
+            t.SetStatus(new TarefaDimensionamento());
         }
 
         public void SetTarefaEntregue(Tarefa t)
         {
-            t.SetStatus(new TarefasEntregue());
+            t.SetStatus(new TarefaEntregue());
         }
 
         public void SetTarefaPendente(Tarefa t)
         {
-            t.SetStatus(new TarefasPendente());
+            t.SetStatus(new TarefaPendente());
         }
     }
 

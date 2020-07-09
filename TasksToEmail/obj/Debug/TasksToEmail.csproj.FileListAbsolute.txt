@@ -80,3 +80,13 @@ C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.dll
 C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.SqlServer.dll
 C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.xml
 C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\EntityFramework.SqlServer.xml
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\LanguageExt.Core.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.Buffers.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.Memory.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.Numerics.Vectors.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.ValueTuple.dll
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\LanguageExt.Core.xml
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.Buffers.xml
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.Memory.xml
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.Numerics.Vectors.xml
+C:\Users\yan_1\Documents\Rerum\TasksToEmail\TasksToEmail\bin\System.ValueTuple.xml
