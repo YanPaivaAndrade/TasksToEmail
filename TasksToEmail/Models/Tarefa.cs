@@ -6,8 +6,7 @@ using TasksToEmail.Models.Interface;
 
 namespace TasksToEmail.Models
 {
-    public class Tarefa : IObservable<Email>
-    {
+    public class Tarefa     {
         public int IdTarefa { get; set; }
         public string Titulo { get; set; }
         public string Type { get; set; }
@@ -17,7 +16,6 @@ namespace TasksToEmail.Models
         public int Severity { get; set; }
         public DateTime ChangeDate { get; set; }
         public string ChangeBy { get; set; }
-        public List<IObserver<Email>> _emails { get; set; }
        
 
 
@@ -54,29 +52,13 @@ namespace TasksToEmail.Models
         }
         public string GetStatus()
         {
-            return "Tarefa: " + this.Titulo
-                + "\n Tipo: " + this.Type
-                + "\n Status:" + _Status.getStatus()
-                + "\n Prioridade: " + this.Priority
-                + "\n Gravidade: " + this.Severity
+            return "Tarefa: " + Titulo
+                + "\n Tipo: " + Type
+                + "\n Status:" + Status
+                + "\n Prioridade: " + Priority
+                + "\n Gravidade: " + Severity
                 + "\n Data da ultima modificação: " + ChangeDate
                 + "\n Altor: " + ChangeBy; 
         }
-       
-
-        public IDisposable Subscribe(IObserver<Email> observer)
-        {
-            if (!_emails.Contains(observer))
-            {
-                _emails.Add(observer);
-            }
-            return new Disposer(_emails, observer);
-        }
-        public void EnviarEmail()
-        {
-            
-        }
-
-
     }
 }

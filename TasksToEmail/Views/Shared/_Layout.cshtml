@@ -17,11 +17,18 @@
                             @Html.ActionLink("Lista de Tarefas", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Email", "Email", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
+                            @Html.ActionLink("Email (tarefas pendentes)", "Email", "Home", new { arg = "Pendente" }, new { @class = "nav-link text-dark" })
                         </li>
-
+                        <li class="nav-item">
+                            @Html.ActionLink("Emails (tarefas entregues)", "Email", "Home", new { arg = "Entregue" }, new { @class = "nav-link text-dark" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Email (tarefas em dimensionamento)", "Email", "Home", new { arg = "Dimensionamento" }, new { @class = "nav-link text-dark" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Email (tarefas em desenvolvimento)", "Email", "Home", new { arg = "Desenvolvimento" }, new { @class = "nav-link text-dark" })
+                        </li>
                     </ul>
-
                 </div>
             </nav>
         </div>

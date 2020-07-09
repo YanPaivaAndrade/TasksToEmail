@@ -12,16 +12,24 @@ using TasksToEmail.Models;
 
 namespace TasksToEmail.Services
 {
-    public static class SpamEmailService
+    public class SpamEmailService
     {
         private static readonly TarefaService _TarefaService = new TarefaService();
+        private static string login = "";
+        private static string senha = "";
+        private static string destinatario = "";
+        private static string remetente = "";
 
-        public static void SendEmailPendente(int tempo)
+        public SpamEmailService() {
+        }
+        public static void SendEmailPendenteAutomatico(int tempo)
         {
+
+        //Cont para em 32 pois é referente a carga horaria de 8h diarias ((8h*60m)/15m) 
             int cont = 0;
             Task.Factory.StartNew(() =>
             {
-                while (_TarefaService.FindAllPendente().Count > 0 && cont < 2)
+                while (_TarefaService.FindAllPendente().Count > 0 && cont < 32)
                 {
                     Thread.Sleep(tempo * 60000);
                     LogDoEmail(_TarefaService.FindAllPendente(), "Pendente");
@@ -30,40 +38,40 @@ namespace TasksToEmail.Services
                 }
             });
         }
-        public static void SendEmailPendente()
+        public static void SendEmailPendente(Email e)
         {
             Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(1 * 60000);
-                LogDoEmail(_TarefaService.FindAllPendente(), "Pendente");
-                Send("Pendente", _TarefaService.FindAllPendente());
+                LogDoEmailCustom(e);
+                SendCustom(e);
             });
         }
-        public static void SendEmailDimensionamento()
+        public static void SendEmailDimensionamento(Email e)
         {
             Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(1 * 60000);
-                LogDoEmail(_TarefaService.FindAllDimensionamento(), "Dimensionamento");   
-                Send("Dimensionamento", _TarefaService.FindAllDimensionamento());
+                LogDoEmailCustom(e);
+                SendCustom(e);
             });
         }
-        public static void SendEmailDesenvolvimento()
+        public static void SendEmailDesenvolvimento(Email e)
         {
             Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(1 * 60000);
-                LogDoEmail(_TarefaService.FindAllDesenvolvimento(), "Desenvolvimento");
-                Send("Desenvolvimento", _TarefaService.FindAllDesenvolvimento());
+                LogDoEmailCustom(e);
+                SendCustom(e);
             });
         }
-        public static void SendEmailEntregue()
+        public static void SendEmailEntregue(Email e)
         {
             Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(1 * 60000);
-                LogDoEmail(_TarefaService.FindAllEntregue(), "Entregue");
-                Send("Entregue", _TarefaService.FindAllEntregue());
+                LogDoEmailCustom(e);
+                SendCustom(e);
             });
         }
         private static void LogDoEmail(List<Tarefa> list, string assunto)
@@ -102,15 +110,15 @@ namespace TasksToEmail.Services
         {
             DateTime data = DateTime.Now;
             string smtpServer = "smtp.gmail.com";
-            string smtpLogin = "";
-            string smtpPassword = "";
+            string smtpLogin = login;
+            string smtpPassword = senha;
             int smtpPort = 587;
 
             Email e = new Email();
             e.Assunto = @"Tarefas " + assunto + " ordenadas por Priority";
             
-            e.Destinatario = @"";
-            e.Remetente = @"";
+            e.Destinatario = destinatario;
+            e.Remetente = remetente;
             MailMessage message = new MailMessage(e.Remetente, e.Destinatario);
             message.Subject = e.Assunto;
             foreach (Tarefa t in list)
@@ -133,6 +141,56 @@ namespace TasksToEmail.Services
                 smtp.Credentials = cred;
             }
 
+            smtp.Send(message);
+
+        }
+        private static void LogDoEmailCustom(Email e)
+        {
+            FileStream file = null;
+            StreamWriter sw = null;
+            string path = @"C:\Users\yan_1\Documents\Rerum\TasksToEmail\log.txt";
+            try
+            {
+                file = new FileStream(path, FileMode.Append);
+                sw = new StreamWriter(file);
+                sw.WriteLine(e.Assunto);
+                sw.WriteLine(e.CorpoDoEmail);
+            }
+            catch
+            {
+                Console.WriteLine("erro");
+            }
+            finally
+            {
+                if (file != null)
+                    file.Close();
+                // if (sw != null)
+                //  sw.Close();
+            }
+        }
+        private static void SendCustom(Email e)
+        {
+            DateTime data = DateTime.Now;
+            string smtpServer = "smtp.gmail.com";
+            string smtpLogin = login;
+            string smtpPassword = senha;
+            int smtpPort = 587;
+            MailMessage message = new MailMessage(e.Remetente, e.Destinatario);
+            message.Subject = e.Assunto;
+            message.Body = @"Segue relatório do RAT gerado em "
+                            + data.ToString("dd / MM / yyyy HH: mm")
+                            + ".\n" + e.CorpoDoEmail;
+
+            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
+            smtp.EnableSsl = smtpPort == 587;
+            smtp.UseDefaultCredentials = smtpPort == 25;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+            if (smtpPort == 587)
+            {
+                NetworkCredential cred = new NetworkCredential(smtpLogin, smtpPassword);
+                smtp.Credentials = cred;
+            }
             smtp.Send(message);
 
         }

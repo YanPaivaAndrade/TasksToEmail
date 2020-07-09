@@ -10,7 +10,7 @@ namespace TasksToEmail.Models
     {
         public string getStatus()
         {
-            return "Desenvolvimento.";
+            return "Desenvolvimento";
         }
 
         public void SetTarefaDesenvolvimento(Tarefa t)

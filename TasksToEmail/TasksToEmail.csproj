@@ -132,7 +132,6 @@
     </Compile>
     <Compile Include="Map\TarefaMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Disposer.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Enumerados\Status.cs" />
     <Compile Include="Models\Enumerados\Type.cs" />
@@ -165,6 +164,7 @@
     <Content Include="Views\Task\Editar.cshtml" />
     <Content Include="Views\Task\NovaTarefa.cshtml" />
     <Content Include="Views\Task\Deletar.cshtml" />
+    <Content Include="Views\Home\Alerta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

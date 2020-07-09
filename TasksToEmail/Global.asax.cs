@@ -20,9 +20,9 @@ namespace TasksToEmail
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            //Preencher os campos de Email e Password antes de executar
-            SpamEmailService.SendEmailPendente(1);
-            SpamEmailService.SendEmailPendente();
+            //Preencher os campos de login,senha , destinatario e remetente  antes de executar
+            //campos presentes no cabeçalho da classe SpamEmailService
+           // SpamEmailService.SendEmailPendenteAutomatico(15);
         }
 
         
