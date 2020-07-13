@@ -36,17 +36,18 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Corpo do Email</span>
         </div>
-
-        <textarea id="@Html.DisplayNameFor(model => model.CorpoDoEmail)"
-                  name="@Html.DisplayNameFor(model => model.CorpoDoEmail)"
-                  class="form-control" rows="8" style="min-width:80%;">@Model.CorpoDoEmail</textarea>
+        <div contenteditable ="true" id="@Html.DisplayNameFor(model => model.CorpoDoEmail)"
+                      name="@Html.DisplayNameFor(model => model.CorpoDoEmail)" 
+              style="background-color:White">
+            @Html.Raw(@Model.CorpoDoEmail)
+        </div>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="form-group">
-                <input type="submit" value="Enviar" class="btn btn-outline-secondary" />
-                @Html.ActionLink("Voltar para lista", "Index", "Home", new { area = "" }, new { @class = "btn btn-outline-secondary" })
-            </div>
+    <div class="form-group">
+        <input type="submit" value="Enviar" class="btn btn-outline-secondary" />
+        @Html.ActionLink("Voltar para lista", "Index", "Home", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+    </div>
         }
     </form>
 </div>

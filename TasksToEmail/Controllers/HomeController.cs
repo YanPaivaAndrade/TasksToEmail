@@ -34,11 +34,13 @@ namespace TasksToEmail.Controllers
             var list =(List<Tarefa>) metodo.Invoke(_TarefaService, null);
             Email e = new Email();
             e.Assunto = "Tarefas " +arg+  " ordenadas por Priority ";
+            e.CorpoDoEmail = SpamEmailService.GetHtml();
             foreach (Tarefa t in list)
             {
                 e.CorpoDoEmail += t.GetStatus();
-                e.CorpoDoEmail += "\n\n";
             }
+            e.CorpoDoEmail += "</table>";
+            
             return View(e);
         }
 

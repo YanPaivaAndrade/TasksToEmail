@@ -22,7 +22,7 @@ namespace TasksToEmail
 
             //Preencher os campos de login,senha , destinatario e remetente  antes de executar
             //campos presentes no cabeçalho da classe SpamEmailService
-            SpamEmailService.SendEmailPendenteAutomatico(15);
+            SpamEmailService.SendEmailPendenteAutomatico(1);
         }
 
         

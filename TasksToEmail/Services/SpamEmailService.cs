@@ -29,7 +29,7 @@ namespace TasksToEmail.Services
             int cont = 0;
             Task.Factory.StartNew(() =>
             {
-                while (_TarefaService.FindAllPendente().Count > 0 && cont < 32)
+                while (_TarefaService.FindAllPendente().Count > 0 && cont < 2)
                 {
                     Thread.Sleep(tempo * 60000);
                     LogDoEmail(_TarefaService.FindAllPendente(), "Pendente");
@@ -110,37 +110,31 @@ namespace TasksToEmail.Services
         {
             DateTime data = DateTime.Now;
             string smtpServer = "smtp.gmail.com";
-            string smtpLogin = login;
-            string smtpPassword = senha;
             int smtpPort = 587;
+            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            NetworkCredential cred = new NetworkCredential(login, senha);
+            smtp.Credentials = cred;
+            smtp.EnableSsl = true;
+
 
             Email e = new Email();
-            e.Assunto = @"Tarefas " + assunto + " ordenadas por Priority";
-            
+            e.Assunto = "Tarefas " + assunto + " ordenadas por Priority";
             e.Destinatario = destinatario;
             e.Remetente = remetente;
-            MailMessage message = new MailMessage(e.Remetente, e.Destinatario);
+            MailMessage message = new MailMessage();
+            message.To.Add(destinatario);
+            message.From = new MailAddress(remetente);
             message.Subject = e.Assunto;
+            message.IsBodyHtml = true;
+
+            e.CorpoDoEmail = GetHtml();
             foreach (Tarefa t in list)
             {
-                e.CorpoDoEmail += t.GetStatus();
-                e.CorpoDoEmail += "\n\n";
+                e.CorpoDoEmail += t.GetStatus();                
             }
-            message.Body = @"Segue relatório do RAT gerado em "
-                            +data.ToString("dd / MM / yyyy HH: mm") 
-                            + ".\n" + e.CorpoDoEmail;
-
-            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-            smtp.EnableSsl = smtpPort == 587;
-            smtp.UseDefaultCredentials = smtpPort == 25;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-            if (smtpPort == 587)
-            {
-                NetworkCredential cred = new NetworkCredential(smtpLogin, smtpPassword);
-                smtp.Credentials = cred;
-            }
-
+            e.CorpoDoEmail += "</table>";
+            message.Body = e.CorpoDoEmail;
             smtp.Send(message);
 
         }
@@ -193,6 +187,17 @@ namespace TasksToEmail.Services
             }
             smtp.Send(message);
 
+        }
+
+        public static string GetHtml()
+        {
+            return "<table  class=\"table table-striped table-hover\">" +
+                                "<tr class=\"badge-secondary bg-primary\">" +
+                                    "<th> Tarefa</th>" +
+                                    "<th> Status</th>" +
+                                    "<th> Data da ultima modificação: </th>" +
+                            "<th> Autor</th>" +
+                            "</tr>";
         }
     }
 }

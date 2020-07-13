@@ -52,13 +52,13 @@ namespace TasksToEmail.Models
         }
         public string GetStatus()
         {
-            return "Tarefa: " + Titulo
-                + "\n Tipo: " + Type
-                + "\n Status:" + Status
-                + "\n Prioridade: " + Priority
-                + "\n Gravidade: " + Severity
-                + "\n Data da ultima modificação: " + ChangeDate
-                + "\n Altor: " + ChangeBy; 
+            return          "<tr>"+
+                                "<td onclick=\"location.href = 'http://www.google.com'; \"style=\"cursor:  pointer; \">" + Titulo + "</td>" +
+                                "<td>" + Status + "</td>"+
+                                "<td>" + ChangeDate + "</td>"+
+                                "<td>" + ChangeBy + "</td>"+
+                            "</tr>";
         }
+       
     }
 }

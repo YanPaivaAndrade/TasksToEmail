@@ -15,19 +15,19 @@ ALTER TABLE Tarefa ADD CONSTRAINT PK_TAREFA
 GO
 
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
-Values('tarefa 1', 'Backlog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+Values('tarefa 1', 'BackLog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
-Values('tarefa 2', 'Backlog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+Values('tarefa 2', 'BackLog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
-Values('tarefa 3', 'Backlog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
+Values('tarefa 3', 'BackLog', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
 Values('tarefa 4', 'Bug', 'Dimensionamento', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
 Values('tarefa 5', 'Bug', 'Pendente', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
-Values('tarefa 6', 'Backlog', 'Dimensionamento', 1, 1, 24/05/2020, 'autor 1');
+Values('tarefa 6', 'BackLog', 'Dimensionamento', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
-Values('tarefa 7', 'Backlog', 'Entregue', 1, 1, 24/05/2020, 'autor 1');
+Values('tarefa 7', 'BackLog', 'Entregue', 1, 1, 24/05/2020, 'autor 1');
 insert into Tarefa (Title, Type, Status, Priority, Severity, ChangeDate, ChangeBy)
 Values('tarefa 8', 'Bug', 'Entregue', 1, 1, 24/05/2020, 'autor 1');
 
