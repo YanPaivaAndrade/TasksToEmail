@@ -42,7 +42,6 @@ namespace TasksToEmail.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-               
             var metodo = _spamEmailService.GetType().GetMethod("SendEmail" + arg);
             metodo.Invoke(_spamEmailService, new object[] { e });
             return RedirectToAction(nameof(Alerta));
