@@ -53,7 +53,7 @@ namespace TasksToEmail.Models
         public string GetStatus()
         {
             return          "<tr>"+
-                                "<td onclick=\"location.href = 'http://www.google.com'; \"style=\"cursor:  pointer; \">" + Titulo + "</td>" +
+                                "<td><a href=\"https://localhost:44397/Task/ViewTarefa?IdTarefa="+IdTarefa+"\">" + Titulo + "</a></td>" +
                                 "<td>" + Status + "</td>"+
                                 "<td>" + ChangeDate + "</td>"+
                                 "<td>" + ChangeBy + "</td>"+

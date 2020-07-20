@@ -1916,7 +1916,7 @@ pre code {
 .table-bordered thead th,
 .table-bordered thead td {
   border-bottom-width: 2px;
-}
+}tbody
 
 .table-borderless th,
 .table-borderless td,
@@ -1932,7 +1932,7 @@ pre code {
 .table-hover tbody tr:hover {
   color: #777;
   background-color: rgba(0, 0, 0, 0.075);
-}
+}table-hover
 
 .table-primary,
 .table-primary > th,

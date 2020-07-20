@@ -32,18 +32,8 @@ namespace TasksToEmail.Controllers
         {
             var metodo = _TarefaService.GetType().GetMethod("FindAll" + arg);
             var list =(List<Tarefa>) metodo.Invoke(_TarefaService, null);
-            Email e = new Email();
-            e.Assunto = "Tarefas " +arg+  " ordenadas por Priority ";
-            e.CorpoDoEmail = SpamEmailService.GetHtml();
-            foreach (Tarefa t in list)
-            {
-                e.CorpoDoEmail += t.GetStatus();
-            }
-            e.CorpoDoEmail += "</table>";
-            
-            return View(e);
+            return View(CorpoEmail(list, arg));
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Email(Email e, string arg)
@@ -52,7 +42,7 @@ namespace TasksToEmail.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            
+               
             var metodo = _spamEmailService.GetType().GetMethod("SendEmail" + arg);
             metodo.Invoke(_spamEmailService, new object[] { e });
             return RedirectToAction(nameof(Alerta));
@@ -61,6 +51,19 @@ namespace TasksToEmail.Controllers
         public ActionResult Alerta()
         {
             return View();
+        }
+
+        private Email CorpoEmail(List<Tarefa> list, string arg)
+        {
+            Email e = new Email();
+            e.Assunto = "Tarefas " + arg + " ordenadas por Priority ";
+            e.CorpoDoEmail = SpamEmailService.GetHtml();
+            foreach (Tarefa t in list)
+            {
+                e.CorpoDoEmail += t.GetStatus();
+            }
+            e.CorpoDoEmail += "</tr></table></table></tr></table>";
+            return e;
         }
     }
 }

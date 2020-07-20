@@ -120,6 +120,7 @@
     <Content Include="Data\script para criar banco.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\HtmlPage1.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
     <Content Include="Views\Task\Deletar.cshtml" />
     <Content Include="Views\Home\Alerta.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Task\ViewTarefa.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

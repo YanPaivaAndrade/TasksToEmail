@@ -120,6 +120,19 @@ namespace TasksToEmail.Controllers
                 return RedirectToAction(nameof(Error), new { menssagem = e.Message });
             }
         }
+        public ActionResult ViewTarefa(int? idTarefa)
+        {
+            if (idTarefa == null)
+            {
+                return RedirectToAction(nameof(Error), new { menssagem = "id não fornecido" });
+            }
+            var tarefa = _TarefaService.FindById(idTarefa.Value);
+            if (tarefa == null)
+            {
+                return RedirectToAction(nameof(Error), new { menssagem = "id não encontrado" });
+            }
+            return View(tarefa);
+        }
         public ActionResult Error(string menssagem)
         {
             var viewModel = new ErrorViewModel

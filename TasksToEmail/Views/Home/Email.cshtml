@@ -5,49 +5,54 @@
 
 <h2>@ViewData["Title"]</h2>
 <div class="jumbotron">
-    <form action="Email" method="post">
-        <input type="hidden" name="arg"
-               value="@Model.Assunto.Split(' ')[1]" />
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Destinatários</span>
-                <input type="text" id="@Html.DisplayNameFor(model => model.Destinatario)"
-                       name="@Html.DisplayNameFor(model => model.Destinatario)"
-                       class="form-control" aria-describedby="inputGroup-sizing-default" style="min-width:140%;">
-            </div>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Remetente</span>
-                <input type="text" id="@Html.DisplayNameFor(model => model.Remetente)"
-                       name="@Html.DisplayNameFor(model => model.Remetente)"
-                       class="form-control" aria-describedby="inputGroup-sizing-default" style="min-width:140%;">
-            </div>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Assunto</span>
-                <input type="text" id="@Html.DisplayNameFor(model => model.Assunto)"
-                       name="@Html.DisplayNameFor(model => model.Assunto)"
-                       class="form-control"
-                       aria-describedby="inputGroup-sizing-default" style="min-width:170%;" value="@Model.Assunto">
-            </div>
-        </div>
-        <div class="input-group-prepend">
-            <span class="input-group-text">Corpo do Email</span>
-        </div>
-        <div contenteditable ="true" id="@Html.DisplayNameFor(model => model.CorpoDoEmail)"
-                      name="@Html.DisplayNameFor(model => model.CorpoDoEmail)" 
-              style="background-color:White">
-            @Html.Raw(@Model.CorpoDoEmail)
-        </div>
+    <div class="form-group">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-    <div class="form-group">
-        <input type="submit" value="Enviar" class="btn btn-outline-secondary" />
-        @Html.ActionLink("Voltar para lista", "Index", "Home", new { area = "" }, new { @class = "btn btn-outline-secondary" })
-    </div>
+            <form action="Email" method="post">
+                <input type="hidden" name="arg"
+                       value="@Model.Assunto.Split(' ')[1]" />
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Destinatários</span>
+                        <input type="text" id="@Html.DisplayNameFor(model => model.Destinatario)"
+                               name="@Html.DisplayNameFor(model => model.Destinatario)"
+                               class="form-control" aria-describedby="inputGroup-sizing-default" style="min-width:140%;">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Remetente</span>
+                        <input type="text" id="@Html.DisplayNameFor(model => model.Remetente)"
+                               name="@Html.DisplayNameFor(model => model.Remetente)"
+                               class="form-control" aria-describedby="inputGroup-sizing-default" style="min-width:140%;">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Assunto</span>
+                        <input type="text" id="@Html.DisplayNameFor(model => model.Assunto)"
+                               name="@Html.DisplayNameFor(model => model.Assunto)"
+                               class="form-control"
+                               aria-describedby="inputGroup-sizing-default" style="min-width:170%;" value="@Model.Assunto">
+                    </div>
+                </div>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Corpo do Email</span>
+                </div>
+                <div contenteditable="true"style="background-color: White">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tr>
+                            <td>
+                                @Html.Raw(@Model.CorpoDoEmail)
+                            </td>
+                        </tr>
+                    </table>
+                     
+                </div>
+                <input type="submit" value="Enviar" class="btn btn-outline-secondary" />
+                @Html.ActionLink("Voltar para lista", "Index", "Home", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+            </form>
         }
-    </form>
+    </div>       
 </div>
